@@ -858,7 +858,7 @@ function cmd_list() {
 		local mn_status="$(try_cmd $(exec_coin cli $1) "masternodedebug" "masternode debug")"
 		[[ ${args[@]} =~ "o" ]] && print_param_info "online"  0 "  online  : " "$([[ $mn_status ]] && echo ${BLUE}true${NC} || echo ${RED}false${NC})"
 		[[ ${args[@]} =~ "b" ]] && print_param_info "block"   0 "  block   : " "$($(exec_coin cli $1) getblockcount)"
-		[[ ${args[@]} =~ "s" ]] && print_param_info "status"  1 "  status  : " "$([[ $mn_status ]] && echo ${GRAY}${mn_status//[$'\r\n']}${NC} || echo ${RED}\(disabled\)${NC})"
+		[[ ${args[@]} =~ "s" ]] && print_param_info "status"  1 "  status  : " "$(try_cmd $(exec_coin cli $1) "masternodedebug" "masternode debug")"
 		[[ ${args[@]} =~ "i" ]] && print_param_info "ip"      1 "  ip      : " "${YELLOW}$(conf_get_value $COIN_FOLDER$1/$COIN_CONFIG $([[ $(conf_get_value $COIN_FOLDER$1/$COIN_CONFIG "masternodeaddr") ]] && echo "masternodeaddr" || echo "externalip"))${NC}"
 		[[ ${args[@]} =~ "r" ]] && print_param_info "rpcport" 0 "  rpcport : " "${MAGENTA}$(conf_get_value $COIN_FOLDER$1/$COIN_CONFIG rpcport)${NC}"
 		[[ ${args[@]} =~ "p" ]] && print_param_info "privkey" 1 "  privkey : " "${GREEN}$(conf_get_value $COIN_FOLDER$1/$COIN_CONFIG masternodeprivkey)${NC}"
