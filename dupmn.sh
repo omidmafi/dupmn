@@ -694,7 +694,7 @@ function cmd_bootstrap() {
 	done
 	rsync -adm --ignore-existing --info=progress2 $(get_folder $1) $(get_folder $2)
 
-	[[ $orig_loaded ]] && echo -e "Reactivating node $1..." && wallet_cmd start $1 > /dev/null
+	# [[ $orig_loaded ]] && echo -e "Reactivating node $1..." && wallet_cmd start $1 > /dev/null
 	[[ $dest_loaded ]] && echo -e "Reactivating node $2..." && wallet_cmd start $2 > /dev/null
 
 	echo_json "{\"message\":\"Bootstrap applied\",\"origin\":{\"node\":$1,\"reenabled\":$(json_bool $orig_loaded)},\"destiny\":{\"node\":$2,\"reenabled\":$(json_bool $dest_loaded)}}"
